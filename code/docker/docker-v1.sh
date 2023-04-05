@@ -1,4 +1,6 @@
 #!/bin/bash
 pushd $(dirname "${0}") > /dev/null
-name='wallymathieu/kubernetes-bootcamp:v1'
-docker build -t $name ./v1 -f Dockerfile && echo "Image $name built"
+version='v1'
+name="wallymathieu/kubernetes-bootcamp:$version"
+
+docker buildx build -t $name ./$version -f Dockerfile --platform=linux/arm64,linux/amd64 --push && echo "Image $name built"
